@@ -26,18 +26,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: List
-        run: ls -l
       
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
           name: assets
           path: dist
-      
-      - name: List contents of dist directory
-        run: ls -l dist
         
       - name: Install dependencies
         run: npx yarn
@@ -46,7 +40,7 @@ jobs:
         run: npx yarn test
 
   deploy:
-    needs: build
+    needs: unit-test
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
       pages: write      # to deploy to Pages
@@ -62,4 +56,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3
+        uses: peaceiris/actions-gh-pages@v3
