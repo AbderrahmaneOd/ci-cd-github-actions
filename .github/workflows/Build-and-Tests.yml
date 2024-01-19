@@ -1,0 +1,46 @@
+name: Build + Unit Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install dependencies
+        run: npx yarn
+      
+      - name: Build
+        run: npx yarn build
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: assets
+          path: dist
+
+  unit-test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: List
+        run: ls -l
+      
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: assets
+          path: dist
+      
+      - name: List contents of dist directory
+        run: ls -l dist
+        
+      - name: Install dependencies
+        run: npx yarn
+      
+      - name: Run unit tests
+        run: npx yarn test
