@@ -1,3 +1,3 @@
-# CI/CD sample app
+# CI/CD sample NodeJS app
 
-https://codio-content.github.io/ci-cd-sample-app
+[![CI-CD](https://github.com/AbderrahmaneOd/ci-cd-github-actions/actions/workflows/CI-CD.yml/badge.svg)](https://github.com/AbderrahmaneOd/ci-cd-github-actions/actions/workflows/CI-CD.yml)
